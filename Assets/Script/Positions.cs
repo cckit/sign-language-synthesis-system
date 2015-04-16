@@ -6,8 +6,8 @@ public class Positions
 {
 	private Transform spine;
 	private Transform shoulderCenter;
-	private Transform leftShoulder;
-	private Transform rightShoulder;
+	private Transform leftArm;
+	private Transform rightArm;
 
 	public Dictionary<Features.Position, Vector3> positions;
 
@@ -17,22 +17,29 @@ public class Positions
 	public Positions (Transform characterTransform)
 	{
 		positions = new Dictionary<Features.Position, Vector3> ();
+		setUpTransform (characterTransform);
+	}
 
-		spine = characterTransform.Find ("Hips/Spine/Spine1");
-		shoulderCenter = spine.Find ("Spine2");
-		leftShoulder = shoulderCenter.Find ("LeftShoulder");
-		rightShoulder = shoulderCenter.Find ("RightShoulder");
+	private void setUpTransform (Transform characterTransform)
+	{
+		spine = characterTransform.Find ("EthanSkeleton/EthanHips/EthanSpine/EthanSpine1/EthanSpine2");
+		shoulderCenter = spine.Find ("EthanNeck");
+		leftArm = shoulderCenter.Find ("EthanLeftShoulder/EthanLeftArm");
+		rightArm = shoulderCenter.Find ("EthanRightShoulder/EthanRightArm");
 
-		Vector3 leftIpsi = new Vector3 ();
-		leftIpsi.x = leftShoulder.position.x;
-		leftIpsi.y = (spine.position.y + shoulderCenter.position.y) / 2;
-		leftIpsi.z = spine.position.z + xPlane;
+		Vector3 leftIpsi = getIpsi (leftArm, shoulderCenter, spine);
 		positions.Add (Features.Position.LEFT_IPSI, leftIpsi);
 
-		Vector3 rightIpsi = new Vector3 ();
-		rightIpsi.x = rightShoulder.position.x;
-		rightIpsi.y = (spine.position.y + shoulderCenter.position.y) / 2;
-		rightIpsi.z = spine.position.z + xPlane;
+		Vector3 rightIpsi = getIpsi (rightArm, shoulderCenter, spine);
 		positions.Add (Features.Position.RIGHT_IPSI, rightIpsi);
+	}
+
+	private Vector3 getIpsi (Transform arm, Transform shoulderCenter, Transform spine)
+	{
+		Vector3 ipsi = new Vector3 ();
+		ipsi.x = (arm.position.x + shoulderCenter.position.x) / 2;
+		ipsi.y = spine.position.y;
+		ipsi.z = spine.position.z + xPlane;
+		return ipsi;
 	}
 }

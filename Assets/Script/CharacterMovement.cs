@@ -10,6 +10,8 @@ public class CharacterMovement : MonoBehaviour
 	private Dictionary<Features.Position, GameObject> positionObjects;
 	private float speed = 1.0f;
 
+	public Transform rightHand;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -33,5 +35,9 @@ public class CharacterMovement : MonoBehaviour
 			GameObject positionObject = positionObjects [position];
 			positionObject.transform.position = Vector3.MoveTowards (positionObject.transform.position, target, step);
 		}
+
+		print (rightHand.position);
+		print (pos.positions [Features.Position.RIGHT_IPSI]);
+		rightHand.position = Vector3.MoveTowards (rightHand.position, pos.positions [Features.Position.RIGHT_IPSI], step);
 	}
 }
