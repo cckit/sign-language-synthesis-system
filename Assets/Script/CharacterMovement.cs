@@ -6,6 +6,7 @@ public class CharacterMovement : MonoBehaviour
 {
 
 	private Positions pos;
+	private IKController rightIKController;
 
 	private Dictionary<Features.Position, GameObject> positionObjects;
 	private float speed = 1.0f;
@@ -16,6 +17,8 @@ public class CharacterMovement : MonoBehaviour
 	void Start ()
 	{
 		pos = new Positions (transform);
+		rightIKController = new IKController (pos.rightHand, pos.rightForeArm, pos.rightArm);
+
 		positionObjects = new Dictionary<Features.Position, GameObject> ();
 		
 		foreach (Features.Position position in pos.positions.Keys) {
@@ -33,11 +36,9 @@ public class CharacterMovement : MonoBehaviour
 		foreach (Features.Position position in pos.positions.Keys) {
 			Vector3 target = pos.positions [position];
 			GameObject positionObject = positionObjects [position];
-			positionObject.transform.position = Vector3.MoveTowards (positionObject.transform.position, target, step);
+			positionObject.transform.position = target;
 		}
 
-		print (rightHand.position);
-		print (pos.positions [Features.Position.RIGHT_IPSI]);
-		rightHand.position = Vector3.MoveTowards (rightHand.position, pos.positions [Features.Position.RIGHT_IPSI], step);
+		rightIKController.Update (pos.positions [Features.Position.RIGHT_IPSI]);
 	}
 }
