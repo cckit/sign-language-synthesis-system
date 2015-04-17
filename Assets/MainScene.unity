@@ -102,6 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23830fb73bb934aa3a24fdf28df21222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightShoulderAngle: 0
+  rightArmAngle: 0
+  rightElbowAngle: 0
   rightHand: {fileID: 630428045}
 --- !u!4 &630428045 stripped
 Transform:
@@ -242,6 +245,34 @@ Prefab:
     - target: {fileID: 100172, guid: b235179bd2a63d1468dd430670338c55, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400256, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: .0818068758
+      objectReference: {fileID: 0}
+    - target: {fileID: 400256, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: .096346125
+      objectReference: {fileID: 0}
+    - target: {fileID: 400256, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: .00930027198
+      objectReference: {fileID: 0}
+    - target: {fileID: 400256, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -.077673167
+      objectReference: {fileID: 0}
+    - target: {fileID: 400256, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: .0839257985
+      objectReference: {fileID: 0}
+    - target: {fileID: 400256, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -.00290163839
+      objectReference: {fileID: 0}
+    - target: {fileID: 400256, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: .993435919
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b235179bd2a63d1468dd430670338c55, type: 3}

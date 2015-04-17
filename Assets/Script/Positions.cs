@@ -6,9 +6,11 @@ public class Positions
 {
 	public Transform spine;
 	public Transform shoulderCenter;
+	public Transform leftShoulder;
 	public Transform leftArm;
 	public Transform leftForeArm;
 	public Transform leftHand;
+	public Transform rightShoulder;
 	public Transform rightArm;
 	public Transform rightForeArm;
 	public Transform rightHand;
@@ -28,10 +30,12 @@ public class Positions
 	{
 		spine = characterTransform.Find ("EthanSkeleton/EthanHips/EthanSpine/EthanSpine1/EthanSpine2");
 		shoulderCenter = spine.Find ("EthanNeck");
-		leftArm = shoulderCenter.Find ("EthanLeftShoulder/EthanLeftArm");
+		leftShoulder = shoulderCenter.Find ("EthanLeftShoulder");
+		leftArm = leftShoulder.Find ("EthanLeftArm");
 		leftForeArm = leftArm.Find ("EthanLeftForeArm");
 		leftHand = leftForeArm.Find ("EthanLeftHand");
-		rightArm = shoulderCenter.Find ("EthanRightShoulder/EthanRightArm");
+		rightShoulder = shoulderCenter.Find ("EthanRightShoulder");
+		rightArm = rightShoulder.Find ("EthanRightArm");
 		rightForeArm = rightArm.Find ("EthanRightForeArm");
 		rightHand = rightForeArm.Find ("EthanRightHand");
 

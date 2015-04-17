@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 public class CharacterMovement : MonoBehaviour
 {
-
+	public float rightShoulderAngle;
+	public float rightArmAngle;
+	public float rightElbowAngle;
 	private Positions pos;
-	private IKController rightIKController;
+	private IIKController rightIKController;
 
 	private Dictionary<Features.Position, GameObject> positionObjects;
 	private float speed = 1.0f;
@@ -39,6 +41,8 @@ public class CharacterMovement : MonoBehaviour
 			positionObject.transform.position = target;
 		}
 
-		rightIKController.Update (pos.positions [Features.Position.RIGHT_IPSI]);
+		Vector3 targetPosition = pos.positions [Features.Position.RIGHT_IPSI];
+		Quaternion targetRotation = Quaternion.LookRotation (Vector3.forward);
+		rightIKController.Update (targetPosition, targetRotation);
 	}
 }
