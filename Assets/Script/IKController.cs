@@ -37,7 +37,7 @@ public class IKController : IIKController
 
 		elbowZ = (distanceToTargetSq - foreArmLengthSq + armLengthSq) / (2 * distanceToTarget);
 		
-		float actualWristLocalZ = Mathf.Clamp (distanceToTarget, 0, armLength + foreArmLength);
+//		float actualWristLocalZ = Mathf.Clamp (distanceToTarget, 0, armLength + foreArmLength);
 		bool isArmFolding = (distanceToTarget < armLength + foreArmLength);
 		bool isDistanceLargerThanArmsDiff = (distanceToTarget > Mathf.Abs (armLength - foreArmLength));
 		

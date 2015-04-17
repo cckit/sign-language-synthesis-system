@@ -11,7 +11,6 @@ public class CharacterMovement : MonoBehaviour
 	private IIKController rightIKController;
 
 	private Dictionary<Features.Position, GameObject> positionObjects;
-	private float speed = 1.0f;
 
 	public Transform rightHand;
 
@@ -34,7 +33,6 @@ public class CharacterMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		float step = speed * Time.deltaTime;
 		foreach (Features.Position position in pos.positions.Keys) {
 			Vector3 target = pos.positions [position];
 			GameObject positionObject = positionObjects [position];
