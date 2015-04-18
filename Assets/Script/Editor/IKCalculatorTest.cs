@@ -10,7 +10,7 @@ namespace SignLanguageSynthesisSystem
 	{
 		private IKCalculator ikCalculator;
 		private Vector3 targetPostion;
-		private const float TEST_EPSILON = 1e-3f;
+		private const double TEST_EPSILON = 1e-6;
 
 		[SetUp]
 		public void setUp ()
@@ -26,23 +26,31 @@ namespace SignLanguageSynthesisSystem
 		[Test]
 		public void TestComputeElbowCircleCenter ()
 		{
-			Vector3d actualResult = ikCalculator.ComputeElbowCircleCenter (targetPostion);
-			Vector3d expectedResult = new Vector3d (0.0828642411, 1.113685611, 0.1062544018);
+			Vector3d actualCenter;
+			double actualRadius;
+			Vector3d expectedCenter = new Vector3d (0.0828642411, 1.113685611, 0.1062544018);
+			double expectedRadius = 0.1563913426;
 
-			AssertInRange (expectedResult.x, actualResult.x);
-			AssertInRange (expectedResult.y, actualResult.y);
-			AssertInRange (expectedResult.z, actualResult.z);
+			ikCalculator.ComputeElbowCircleCenter (targetPostion, out actualCenter, out actualRadius);
+
+			AssertInRange (expectedCenter.x, actualCenter.x);
+			AssertInRange (expectedCenter.y, actualCenter.y);
+			AssertInRange (expectedCenter.z, actualCenter.z);
+
+			AssertInRange (expectedRadius, actualRadius);
 		}
 
 		[Test]
 		public void TestComputeElbowCircleAngles ()
 		{
+			Vector3d actualCenter;
+			double actualRadius;
 			double actualZenithAngle = 0;
 			double actualAzimuthAngle = 0;
 			const double expectedZenithAngle = 153.5004749;
 			const double expectedAzimuthAngle = 46.8165359;
 
-			ikCalculator.ComputeElbowCircleCenter (targetPostion);
+			ikCalculator.ComputeElbowCircleCenter (targetPostion, out actualCenter, out actualRadius);
 			ikCalculator.ComputeElbowCircleAngles (targetPostion, out actualZenithAngle, out actualAzimuthAngle);
 
 			AssertInRange (expectedZenithAngle, actualZenithAngle);

@@ -25,7 +25,7 @@ public abstract class AbstractIKCalculator
 		this.foreArmLength = Vector3d.Distance (this.elbow, this.wrist);
 	}
 
-	public abstract Vector3d ComputeElbowCircleCenter (Vector3 targetPostion);
+	public abstract void ComputeElbowCircleCenter (Vector3 targetPostion, out Vector3d center, out double radius);
 
 	public abstract void ComputeElbowCircleAngles (Vector3 targetPosition, out double zenithAngle, out double azimuthAngle);
 
