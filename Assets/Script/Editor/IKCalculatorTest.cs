@@ -26,8 +26,8 @@ namespace SignLanguageSynthesisSystem
 		[Test]
 		public void TestComputeElbowCircleCenter ()
 		{
-			Vector3 actualResult = ikCalculator.ComputeElbowCircleCenter (targetPostion);
-			Vector3 expectedResult = new Vector3 (0.0828642411f, 1.113685611f, 0.1062544018f);
+			Vector3d actualResult = ikCalculator.ComputeElbowCircleCenter (targetPostion);
+			Vector3d expectedResult = new Vector3d (0.0828642411, 1.113685611, 0.1062544018);
 
 			AssertInRange (expectedResult.x, actualResult.x);
 			AssertInRange (expectedResult.y, actualResult.y);
@@ -37,10 +37,10 @@ namespace SignLanguageSynthesisSystem
 		[Test]
 		public void TestComputeElbowCircleAngles ()
 		{
-			float actualZenithAngle = 0f;
-			float actualAzimuthAngle = 0f;
-			const float expectedZenithAngle = -26.4995251f;
-			const float expectedAzimuthAngle = 46.8165359f;
+			double actualZenithAngle = 0;
+			double actualAzimuthAngle = 0;
+			const double expectedZenithAngle = 153.5004749;
+			const double expectedAzimuthAngle = 46.8165359;
 
 			ikCalculator.ComputeElbowCircleCenter (targetPostion);
 			ikCalculator.ComputeElbowCircleAngles (targetPostion, out actualZenithAngle, out actualAzimuthAngle);
@@ -52,12 +52,12 @@ namespace SignLanguageSynthesisSystem
 		[Test]
 		public void TestComputeElbowCircle ()
 		{
-			Vector3 actualCenterPosition = new Vector3 ();
-			Vector3 actualCosineParas = new Vector3 ();
-			Vector3 actualSineParas = new Vector3 ();
-			Vector3 expectedCenterPosition = new Vector3 (0.0828642411f, 1.113685611f, 0.1062544018f);
-			Vector3 expectedCosineParas = new Vector3 (0.1140352749f, -0.1070243343f, 0f);
-			Vector3 expectedSineParas = new Vector3 (0.0957801501f, 0.1020545077f, 0.069780315f);
+			Vector3d actualCenterPosition = new Vector3d ();
+			Vector3d actualCosineParas = new Vector3d ();
+			Vector3d actualSineParas = new Vector3d ();
+			Vector3d expectedCenterPosition = new Vector3d (0.0828642411, 1.113685611, 0.1062544018);
+			Vector3d expectedCosineParas = new Vector3d (0.1140352749, -0.1070243343, 0);
+			Vector3d expectedSineParas = new Vector3d (0.0957801501, 0.1020545077, 0.069780315);
 
 			ikCalculator.ComputeElbowCircle (targetPostion, out actualCenterPosition, out actualCosineParas, out actualSineParas);
 
@@ -74,9 +74,9 @@ namespace SignLanguageSynthesisSystem
 			AssertInRange (expectedSineParas.z, actualSineParas.z);
 		}
 
-		private void AssertInRange (float expected, float actual)
+		private void AssertInRange (double expected, double actual)
 		{
-			Assert.That (actual, Is.InRange (expected * (1f - TEST_EPSILON), expected * (1f + TEST_EPSILON)));
+			Assert.That (actual, Is.InRange (expected * (1.0 - TEST_EPSILON), expected * (1.0 + TEST_EPSILON)));
 		}
 	}
 }

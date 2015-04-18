@@ -3,31 +3,31 @@ using System.Collections;
 
 public abstract class AbstractIKCalculator
 {
-	protected Vector3 shoulder;
-	protected Vector3 elbow;
-	protected Vector3 wrist;
+	protected Vector3d shoulder;
+	protected Vector3d elbow;
+	protected Vector3d wrist;
 
-	protected float armLength;
-	protected float foreArmLength;
+	protected double armLength;
+	protected double foreArmLength;
 
 	public AbstractIKCalculator (Vector3 shoulder, Vector3 elbow, Vector3 wrist)
 	{
-		this.shoulder = shoulder;
-		this.elbow = elbow;
-		this.wrist = wrist;
+		this.shoulder = new Vector3d (shoulder);
+		this.elbow = new Vector3d (elbow);
+		this.wrist = new Vector3d (wrist);
 
 		this.SetUp ();
 	}
 
 	private void SetUp ()
 	{
-		this.armLength = Vector3.Distance (this.shoulder, this.elbow);
-		this.foreArmLength = Vector3.Distance (this.elbow, this.wrist);
+		this.armLength = Vector3d.Distance (this.shoulder, this.elbow);
+		this.foreArmLength = Vector3d.Distance (this.elbow, this.wrist);
 	}
 
-	public abstract Vector3 ComputeElbowCircleCenter (Vector3 targetPostion);
+	public abstract Vector3d ComputeElbowCircleCenter (Vector3 targetPostion);
 
-	public abstract void ComputeElbowCircleAngles (Vector3 targetPosition, out float zenithAngle, out float azimuthAngle);
+	public abstract void ComputeElbowCircleAngles (Vector3 targetPosition, out double zenithAngle, out double azimuthAngle);
 
-	public abstract void ComputeElbowCircle (Vector3 targetPosition, out Vector3 centerPosition, out Vector3 cosineParas, out Vector3 sineParas);
+	public abstract void ComputeElbowCircle (Vector3 targetPosition, out Vector3d centerPosition, out Vector3d cosineParas, out Vector3d sineParas);
 }
