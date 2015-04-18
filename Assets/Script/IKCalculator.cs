@@ -10,7 +10,13 @@ public class IKCalculator : AbstractIKCalculator
 
 	public override Vector3 ComputeElbowCircleCenter (Vector3 targetPostion)
 	{
-		throw new System.NotImplementedException ();
+		float distanceToTarget = Vector3.Distance (base.shoulder, targetPostion);
+		float distanceToTargetSq = Mathf.Pow (distanceToTarget, 2);
+		float armLengthSq = Mathf.Pow (base.armLength, 2);
+		float foreArmLengthSq = Mathf.Pow (base.foreArmLength, 2);
+		float z = (distanceToTargetSq + armLengthSq - foreArmLengthSq) / (2 * distanceToTarget);
+
+		return Vector3.Lerp (base.shoulder, targetPostion, 1 - z);
 	}
 
 	public override void ComputeElbowCircleAngles (Vector3 targetPosition, out float zenithAngle, out float azimuthAngle)

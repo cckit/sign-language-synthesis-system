@@ -29,9 +29,9 @@ namespace SignLanguageSynthesisSystem
 			Vector3 actualResult = ikCalculator.ComputeElbowCircleCenter (targetPostion);
 			Vector3 expectedResult = new Vector3 (0.0828642411f, 1.113685611f, 0.1062544018f);
 
-			Assert.LessOrEqual (Mathf.Abs (expectedResult.x - actualResult.x), TEST_EPSILON);
-			Assert.LessOrEqual (Mathf.Abs (expectedResult.y - actualResult.y), TEST_EPSILON);
-			Assert.LessOrEqual (Mathf.Abs (expectedResult.z - actualResult.z), TEST_EPSILON);
+			AssertInRange (expectedResult.x, actualResult.x);
+			AssertInRange (expectedResult.y, actualResult.y);
+			AssertInRange (expectedResult.z, actualResult.z);
 		}
 
 		[Test]
@@ -45,8 +45,8 @@ namespace SignLanguageSynthesisSystem
 			ikCalculator.ComputeElbowCircleCenter (targetPostion);
 			ikCalculator.ComputeElbowCircleAngles (targetPostion, out actualZenithAngle, out actualAzimuthAngle);
 
-			Assert.LessOrEqual (Mathf.Abs (expectedZenithAngle - actualZenithAngle), TEST_EPSILON);
-			Assert.LessOrEqual (Mathf.Abs (expectedAzimuthAngle - actualAzimuthAngle), TEST_EPSILON);
+			AssertInRange (expectedZenithAngle, actualZenithAngle);
+			AssertInRange (expectedAzimuthAngle, actualAzimuthAngle);
 		}
 
 		[Test]
@@ -61,17 +61,22 @@ namespace SignLanguageSynthesisSystem
 
 			ikCalculator.ComputeElbowCircle (targetPostion, out actualCenterPosition, out actualCosineParas, out actualSineParas);
 
-			Assert.LessOrEqual (Mathf.Abs (expectedCenterPosition.x - actualCenterPosition.x), TEST_EPSILON);
-			Assert.LessOrEqual (Mathf.Abs (expectedCenterPosition.y - actualCenterPosition.y), TEST_EPSILON);
-			Assert.LessOrEqual (Mathf.Abs (expectedCenterPosition.z - actualCenterPosition.z), TEST_EPSILON);
+			AssertInRange (expectedCenterPosition.x, actualCenterPosition.x);
+			AssertInRange (expectedCenterPosition.y, actualCenterPosition.y);
+			AssertInRange (expectedCenterPosition.z, actualCenterPosition.z);
 
-			Assert.LessOrEqual (Mathf.Abs (expectedCosineParas.x - actualCosineParas.x), TEST_EPSILON);
-			Assert.LessOrEqual (Mathf.Abs (expectedCosineParas.y - actualCosineParas.y), TEST_EPSILON);
-			Assert.LessOrEqual (Mathf.Abs (expectedCosineParas.z - actualCosineParas.z), TEST_EPSILON);
+			AssertInRange (expectedCosineParas.x, actualCosineParas.x);
+			AssertInRange (expectedCosineParas.y, actualCosineParas.y);
+			AssertInRange (expectedCosineParas.z, actualCosineParas.z);
 
-			Assert.LessOrEqual (Mathf.Abs (expectedSineParas.x - actualSineParas.x), TEST_EPSILON);
-			Assert.LessOrEqual (Mathf.Abs (expectedSineParas.y - actualSineParas.y), TEST_EPSILON);
-			Assert.LessOrEqual (Mathf.Abs (expectedSineParas.z - actualSineParas.z), TEST_EPSILON);
+			AssertInRange (expectedSineParas.x, actualSineParas.x);
+			AssertInRange (expectedSineParas.y, actualSineParas.y);
+			AssertInRange (expectedSineParas.z, actualSineParas.z);
+		}
+
+		private void AssertInRange (float expected, float actual)
+		{
+			Assert.That (actual, Is.InRange (expected * (1f - TEST_EPSILON), expected * (1f + TEST_EPSILON)));
 		}
 	}
 }
