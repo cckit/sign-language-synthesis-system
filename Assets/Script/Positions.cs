@@ -4,10 +4,16 @@ using System.Collections.Generic;
 
 public class Positions
 {
-	private Transform spine;
-	private Transform shoulderCenter;
-	private Transform leftArm;
-	private Transform rightArm;
+	public Transform spine;
+	public Transform shoulderCenter;
+	public Transform leftShoulder;
+	public Transform leftArm;
+	public Transform leftForeArm;
+	public Transform leftHand;
+	public Transform rightShoulder;
+	public Transform rightArm;
+	public Transform rightForeArm;
+	public Transform rightHand;
 
 	public Dictionary<Features.Position, Vector3> positions;
 
@@ -17,24 +23,30 @@ public class Positions
 	public Positions (Transform characterTransform)
 	{
 		positions = new Dictionary<Features.Position, Vector3> ();
-		setUpTransform (characterTransform);
+		SetUpTransform (characterTransform);
 	}
 
-	private void setUpTransform (Transform characterTransform)
+	private void SetUpTransform (Transform characterTransform)
 	{
 		spine = characterTransform.Find ("EthanSkeleton/EthanHips/EthanSpine/EthanSpine1/EthanSpine2");
 		shoulderCenter = spine.Find ("EthanNeck");
-		leftArm = shoulderCenter.Find ("EthanLeftShoulder/EthanLeftArm");
-		rightArm = shoulderCenter.Find ("EthanRightShoulder/EthanRightArm");
+		leftShoulder = shoulderCenter.Find ("EthanLeftShoulder");
+		leftArm = leftShoulder.Find ("EthanLeftArm");
+		leftForeArm = leftArm.Find ("EthanLeftForeArm");
+		leftHand = leftForeArm.Find ("EthanLeftHand");
+		rightShoulder = shoulderCenter.Find ("EthanRightShoulder");
+		rightArm = rightShoulder.Find ("EthanRightArm");
+		rightForeArm = rightArm.Find ("EthanRightForeArm");
+		rightHand = rightForeArm.Find ("EthanRightHand");
 
-		Vector3 leftIpsi = getIpsi (leftArm, shoulderCenter, spine);
+		Vector3 leftIpsi = GetIpsi (leftArm, shoulderCenter, spine);
 		positions.Add (Features.Position.LEFT_IPSI, leftIpsi);
 
-		Vector3 rightIpsi = getIpsi (rightArm, shoulderCenter, spine);
+		Vector3 rightIpsi = GetIpsi (rightArm, shoulderCenter, spine);
 		positions.Add (Features.Position.RIGHT_IPSI, rightIpsi);
 	}
 
-	private Vector3 getIpsi (Transform arm, Transform shoulderCenter, Transform spine)
+	private Vector3 GetIpsi (Transform arm, Transform shoulderCenter, Transform spine)
 	{
 		Vector3 ipsi = new Vector3 ();
 		ipsi.x = (arm.position.x + shoulderCenter.position.x) / 2;
