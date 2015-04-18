@@ -84,7 +84,9 @@ namespace SignLanguageSynthesisSystem
 
 		private void AssertInRange (double expected, double actual)
 		{
-			Assert.That (actual, Is.InRange (expected * (1.0 - TEST_EPSILON), expected * (1.0 + TEST_EPSILON)));
+			double minExpected = expected * (1.0 - TEST_EPSILON * (expected >= 0 ? 1 : -1));
+			double maxExpected = expected * (1.0 + TEST_EPSILON * (expected >= 0 ? 1 : -1));
+			Assert.That (actual, Is.InRange (minExpected, maxExpected));
 		}
 	}
 }

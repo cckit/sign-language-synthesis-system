@@ -36,6 +36,15 @@ public class IKCalculator : AbstractIKCalculator
 
 	public override void ComputeElbowCircle (Vector3 targetPosition, out Vector3d center, out Vector3d cosineParas, out Vector3d sineParas)
 	{
-		throw new System.NotImplementedException ();
+		double radius;
+		double zenithAngle;
+		double azimuthAngle;
+		this.ComputeElbowCircleCenter (targetPosition, out center, out radius);
+		this.ComputeElbowCircleAngles (targetPosition, out zenithAngle, out azimuthAngle);
+
+		zenithAngle *= Mathd.Deg2Rad;
+		azimuthAngle *= Mathd.Deg2Rad;
+		cosineParas = new Vector3d (Mathd.Sin (azimuthAngle), -Mathd.Cos (azimuthAngle)) * radius;
+		sineParas = new Vector3d (-Mathd.Cos (zenithAngle) * Mathd.Cos (azimuthAngle), -Mathd.Cos (zenithAngle) * Mathd.Sin (azimuthAngle), Mathd.Sin (zenithAngle)) * radius;
 	}
 }
