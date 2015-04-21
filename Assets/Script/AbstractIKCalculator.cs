@@ -29,5 +29,5 @@ public abstract class AbstractIKCalculator
 
 	public abstract void ComputeElbowCircleAngles (Vector3 targetPosition, out double zenithAngle, out double azimuthAngle);
 
-	public abstract void ComputeElbowCircle (Vector3 targetPosition, out Vector3d centerPosition, out Vector3d cosineParas, out Vector3d sineParas);
+	public abstract void ComputeElbowCircle (Vector3 targetPosition, out CircleLocusParameters locusParas);
 }

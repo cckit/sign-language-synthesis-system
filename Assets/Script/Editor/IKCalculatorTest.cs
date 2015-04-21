@@ -60,26 +60,24 @@ namespace SignLanguageSynthesisSystem
 		[Test]
 		public void TestComputeElbowCircle ()
 		{
-			Vector3d actualCenterPosition = new Vector3d ();
-			Vector3d actualCosineParas = new Vector3d ();
-			Vector3d actualSineParas = new Vector3d ();
 			Vector3d expectedCenterPosition = new Vector3d (0.0828642411, 1.113685611, 0.1062544018);
 			Vector3d expectedCosineParas = new Vector3d (0.1140352749, -0.1070243343, 0);
 			Vector3d expectedSineParas = new Vector3d (0.0957801501, 0.1020545077, 0.069780315);
+			CircleLocusParameters actualResult;
 
-			ikCalculator.ComputeElbowCircle (targetPostion, out actualCenterPosition, out actualCosineParas, out actualSineParas);
+			ikCalculator.ComputeElbowCircle (targetPostion, out actualResult);
 
-			AssertInRange (expectedCenterPosition.x, actualCenterPosition.x);
-			AssertInRange (expectedCenterPosition.y, actualCenterPosition.y);
-			AssertInRange (expectedCenterPosition.z, actualCenterPosition.z);
+			AssertInRange (expectedCenterPosition.x, actualResult.Center.x);
+			AssertInRange (expectedCenterPosition.y, actualResult.Center.y);
+			AssertInRange (expectedCenterPosition.z, actualResult.Center.z);
 
-			AssertInRange (expectedCosineParas.x, actualCosineParas.x);
-			AssertInRange (expectedCosineParas.y, actualCosineParas.y);
-			AssertInRange (expectedCosineParas.z, actualCosineParas.z);
+			AssertInRange (expectedCosineParas.x, actualResult.ConsineParas.x);
+			AssertInRange (expectedCosineParas.y, actualResult.ConsineParas.y);
+			AssertInRange (expectedCosineParas.z, actualResult.ConsineParas.z);
 
-			AssertInRange (expectedSineParas.x, actualSineParas.x);
-			AssertInRange (expectedSineParas.y, actualSineParas.y);
-			AssertInRange (expectedSineParas.z, actualSineParas.z);
+			AssertInRange (expectedSineParas.x, actualResult.SineParas.x);
+			AssertInRange (expectedSineParas.y, actualResult.SineParas.y);
+			AssertInRange (expectedSineParas.z, actualResult.SineParas.z);
 		}
 
 		private void AssertInRange (double expected, double actual)

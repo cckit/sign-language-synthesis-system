@@ -34,17 +34,22 @@ public class IKCalculator : AbstractIKCalculator
 		azimuthAngle = Mathd.Repeat (azimuthAngle, 180.0);
 	}
 
-	public override void ComputeElbowCircle (Vector3 targetPosition, out Vector3d center, out Vector3d cosineParas, out Vector3d sineParas)
+	public override void ComputeElbowCircle (Vector3 targetPosition, out CircleLocusParameters locusParas)
 	{
 		double radius;
 		double zenithAngle;
 		double azimuthAngle;
+		Vector3d center;
+
 		this.ComputeElbowCircleCenter (targetPosition, out center, out radius);
 		this.ComputeElbowCircleAngles (targetPosition, out zenithAngle, out azimuthAngle);
 
 		zenithAngle *= Mathd.Deg2Rad;
 		azimuthAngle *= Mathd.Deg2Rad;
-		cosineParas = new Vector3d (Mathd.Sin (azimuthAngle), -Mathd.Cos (azimuthAngle)) * radius;
-		sineParas = new Vector3d (-Mathd.Cos (zenithAngle) * Mathd.Cos (azimuthAngle), -Mathd.Cos (zenithAngle) * Mathd.Sin (azimuthAngle), Mathd.Sin (zenithAngle)) * radius;
+
+		locusParas = new CircleLocusParameters ();
+		locusParas.Center = center;
+		locusParas.ConsineParas = new Vector3d (Mathd.Sin (azimuthAngle), -Mathd.Cos (azimuthAngle)) * radius;
+		locusParas.SineParas = new Vector3d (-Mathd.Cos (zenithAngle) * Mathd.Cos (azimuthAngle), -Mathd.Cos (zenithAngle) * Mathd.Sin (azimuthAngle), Mathd.Sin (zenithAngle)) * radius;
 	}
 }
